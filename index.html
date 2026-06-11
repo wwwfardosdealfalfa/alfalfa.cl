@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrocomercial Chicureo - Fardos de Alfalfa Premium</title>
+    <style>
+        /* Variables de Color */
+        :root {
+            --primary: #1e4620;       
+            --primary-light: #f0f7f2; 
+            --accent: #e5a93b;        
+            --dark: #231f1a;          
+            --light: #faf9f6;         
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Barra de Navegación */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            fill: var(--primary);
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        .contact-btn-top {
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .contact-btn-top:hover {
+            background-color: #132d15;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Slider - Fondo con Imágenes que pasan automáticamente */
+        .hero-slider {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(30, 70, 32, 0.7), rgba(35, 31, 26, 0.8));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.1;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: #e3e8e4;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+            text-decoration: none;
+            padding: 1.1rem 2.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 20px rgba(229, 169, 59, 0.4);
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #d1952e;
+            transform: translateY(-3px);
+        }
+
+        /* Secciones Generales */
+        section { padding: 5rem 2rem; }
+        .section-container { max-width: 1200px; margin: 0 auto; }
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            font-weight: 800;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Sección Quiénes Somos */
+        .about-section { background-color: var(--white); }
+        .about-grid { display: flex; flex-wrap: wrap; gap: 2.5rem; align-items: center; }
+        .about-main-text { flex: 1 1 500px; font-size: 1.1rem; color: #4a453f; }
+        .about-main-text p { margin-bottom: 1.5rem; }
+        .mv-cards { display: flex; flex-wrap: wrap; gap: 1.5rem; width: 100%; }
+        .mv-card { background: var(--primary-light); padding: 2rem; border-radius: 12px; flex: 1 1 450px; border-left: 5px solid var(--primary); }
+        .mv-card h3 { color: var(--primary); font-size: 1.4rem; margin-bottom: 0.8rem; }
+
+        /* Tarjetas de Características */
+        .features-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+        .feature-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            flex: 1 1 300px;
+            max-width: 360px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(30, 70, 32, 0.08);
+            border-color: rgba(30, 70, 32, 0.1);
+        }
+        .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+        .feature-card h3 { color: var(--primary); margin-bottom: 1rem; }
+
+        /* Catálogo */
+        .products { background-color: var(--primary-light); }
+        .products-grid { display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center; }
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            flex: 1 1 320px;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+        .product-card:hover { transform: scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .product-img { height: 220px; background-size: cover; background-position: center; position: relative; }
+        .product-tag { position: absolute; top: 15px; left: 15px; background-color: var(--primary); color: var(--white); font-size: 0.75rem; font-weight: 700; padding: 0.4rem 0.8rem; border-radius: 20px; }
+        .product-info { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-info h3 { color: var(--primary); margin-bottom: 0.8rem; }
+        .product-info p { font-size: 0.95rem; color: #5a554f; margin-bottom: 1.5rem; flex-grow: 1; }
+
+        /* Canales de Contacto, Formulario y GPS */
+        .contact-section { background-color: var(--white); }
+        .contact-grid { display: flex; flex-wrap: wrap; gap: 3rem; }
+        .contact-form-block { flex: 1 1 500px; }
+        .contact-form { background-color: var(--light); padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 15px var(--shadow); }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; background-color: var(--white); }
+        .btn-submit { background-color: var(--primary); color: var(--white); border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; transition: var(--transition); }
+        .btn-submit:hover { background-color: #132d15; }
+        .contact-info-block { flex: 1 1 500px; display: flex; flex-direction: column; gap: 2rem; }
+        .info-details { background-color: var(--primary-light); padding: 2rem; border-radius: 16px; }
+        .info-details h3 { color: var(--primary); margin-bottom: 1.2rem; }
+        .info-details p { margin-bottom: 0.8rem; font-size: 0.95rem; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(30, 70, 32, 0.1); padding-bottom: 0.5rem; }
+        .info-details span.label { font-weight: 700; }
+        .map-container { width: 100%; height: 320px; border-radius: 16px; overflow: hidden; border: 2px solid var(--primary-light); }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+
+        /* Redes Sociales y Footer */
+        footer { background-color: var(--dark); color: #b5b1aa; padding: 4rem 2rem 2rem 2rem; text-align: center; font-size: 0.9rem; border-top: 5px solid var(--accent); }
+        footer h4 { color: var(--white); margin-bottom: 1rem; font-size: 1.4rem; }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .social-icon {
+            background-color: rgba(255, 255, 255, 0.08);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        .social-icon svg { width: 22px; height: 22px; fill: var(--white); }
+        .footer-credits { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #3a342c; }
+
+        /* Botón de WhatsApp Flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .whatsapp-float:hover { transform: scale(1.1); background-color: #128c7e; }
+
+        /* INTERFAZ DEL BOT INTERACTIVO */
+        .bot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 340px;
+            max-height: 450px;
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 999;
+            border: 1px solid rgba(0,0,0,0.05);
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .bot-container.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .bot-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .bot-header h5 { font-size: 1rem; font-weight: 700; }
+        .bot-close { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
+        .bot-chat-area {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: #f4f6f4;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .msg { padding: 0.7rem 1rem; border-radius: 12px; max-width: 85%; }
+        .msg.bot { background-color: var(--white); color: var(--dark); align-self: flex-start; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .msg.user { background-color: var(--primary-light); color: var(--primary); align-self: flex-end; font-weight: 600; }
+        .bot-options {
+            padding: 0.8rem;
+            background-color: var(--white);
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .opt-btn {
+            background-color: var(--light);
+            border: 1px solid #ddd;
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4a453f;
+            transition: var(--transition);
+        }
+        .opt-btn:hover { background-color: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+        
+        /* Botón de activación del Asistente */
+        .bot-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 100px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0 1.2rem;
+            height: 60px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(30,70,32,0.25);
+            z-index: 999;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .bot-toggle:hover { background-color: #132d15; transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2rem; }
+            header { flex-direction: column; gap: 1.2rem; text-align: center; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .bot-container { width: 90%; right: 5%; bottom: 95px; }
+            .bot-toggle { bottom: 25px; left: 5%; right: auto; width: 42%; justify-content: center; }
+            .whatsapp-float { width: 50px; height: 50px; right: 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo-box">
+            <svg class="logo-icon" viewBox="0 0 24 24">
+                <path d="M12,2C11.5,4 10,5.5 10,7.5C10,8.5 10.5,9.5 11.5,10C9.5,10.5 8.5,12 8.5,13.5C8.5,14.5 9,15.5 10,16C7.5,16.5 6.5,18.5 6.5,20C6.5,21 7,22 8,22C10,22 11,19.5 12,18C13,19.5 14,22 16,22C17,22 17.5,21 17.5,20C17.5,18.5 16.5,16.5 14,16C15,15.5 15.5,14.5 15.5,13.5C15.5,12 14.5,10.5 12.5,10C13.5,9.5 14,8.5 14,7.5C14,5.5 12.5,4 12,2Z"/>
+            </svg>
+            <div class="logo-text">
+                <h1>Agrocomercial Chicureo</h1>
+                <p>Nutrición & Forraje de Calidad</p>
+            </div>
+        </a>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Quiénes Somos</a>
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+            <a href="https://wa.me/56936433269?text=Hola" class="contact-btn-top" target="_blank">Llamar Ahora</a>
+        </nav>
+    </header>
+
+    <section class="hero-slider" id="inicio">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1595107117004-9467268d0bbd?auto=format&fit=crop&q=80&w=1200')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=1200')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1200')"></div>
+        
+        <div class="hero-content">
+            <h2>Forraje de Excelencia para tus Animales</h2>
+            <p>Suministramos fardos de alfalfa seleccionada en Chicureo, Colina y Santiago Zona Norte con logística a tu medida.</p>
+            <a href="https://wa.me/56936433269?text=Hola,%20quiero%20hacer%20un%20pedido" class="btn-primary" target="_blank">Hacer Pedido Inmediato</a>
+        </div>
+    </section>
+
+    <section class="about-section" id="nosotros">
+        <div class="section-container">
+            <h2 class="section-title">Quiénes Somos</h2>
+            <div class="about-grid">
+                <div class="about-main-text">
+                    <p>En **Agrocomercial Chicureo SpA** nos especializamos en la comercialización y distribución de alimento ganadero y equino de la más alta calidad. Nos ubicamos estratégicamente en la zona norte de Santiago para responder rápidamente a las necesidades de haras, clubes ecuestres y criaderos particulares.</p>
+                </div>
+                <div class="mv-cards">
+                    <div class="mv-card">
+                        <h3>Nuestra Misión</h3>
+                        <p>Proveer soluciones confiables de alimentación animal, garantizando la frescura y el valor proteico de cada fardo de alfalfa distribuido.</p>
+                    </div>
+                    <div class="mv-card">
+                        <h3>Nuestra Visión</h3>
+                        <p>Consolidarnos como la distribuidora de forraje líder en la provincia de Chacabuco y sus alrededores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="productos">
+        <div class="section-container">
+            <h2 class="section-title">Catálogo Comercial</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=400')"><span class="product-tag">Formato de 30 KG</span></div>
+                    <div class="product-info">
+                        <h3>Fardo de Alfalfa</h3>
+                        <p>Apretado con amarra de alambre. Aporte ideal de fibra y proteínas para equinos de alta exigencia.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1534073828943-f801091bb18c?auto=format&fit=crop&q=80&w=400')"><span class="product-tag">Alta Concentración</span></div>
+                    <div class="product-info">
+                        <h3>Pellet de Alfalfa</h3>
+                        <p>Forraje deshidratado y comprimido. Conserva todas las ventajas alimenticias evitando mermas.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=400')"><span class="product-tag">Fibra Esencial</span></div>
+                    <div class="product-info">
+                        <h3>Ballica Seleccionada</h3>
+                        <p>Excelente palatabilidad y balance digestivo. El complemento de fibra indispensable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+        <div class="section-container">
+            <h2 class="section-title">Canales de Contacto y Ubicación</h2>
+            <div class="contact-grid">
+                <div class="contact-form-block">
+                    <form class="contact-form" onsubmit="alert('¡Gracias por tu mensaje! Te contactaremos a la brevedad.'); return false;">
+                        <div class="form-group">
+                            <label>Nombre Completo / Empresa</label>
+                            <input type="text" required placeholder="Ej. Juan Pérez">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono de Contacto</label>
+                            <input type="tel" required placeholder="Ej. +56 9 1234 5678">
+                        </div>
+                        <div class="form-group">
+                            <label>Detalle de tu Requerimiento</label>
+                            <textarea rows="4" required placeholder="Cantidad de fardos, lugar de despacho..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Enviar Cotización</button>
+                    </form>
+                </div>
+                <div class="contact-info-block">
+                    <div class="info-details">
+                        <h3>📍 Información de Operaciones</h3>
+                        <p><span class="label">Dirección Particular:</span><span>Alba 1, Parcela 16, Lote 13, Colina</span></p>
+                        <p><span class="label">Lunes a Jueves:</span><span>11:00 AM – 10:00 PM</span></p>
+                        <p><span class="label">Viernes a Domingo:</span><span>11:00 AM – 12:00 AM (Medianoche)</span></p>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13348.681145656754!2d-70.68603685501865!3d-33.23581799787363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662b9a7fb3c96eb%3A0xb1cb8fe276413a17!2sAlba%201%2C%20Colina%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses!2scl!4v1715800000000!5m2!1ses!2scl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h4>Agrocomercial Chicureo SpA</h4>
+        <p>Expertos en nutrición, forraje y logística animal de excelencia.</p>
+        
+        <div class="social-links">
+            <a href="https://www.tiktok.com/" class="social-icon" target="_blank" title="Síguenos en TikTok">
+                <svg viewBox="0 0 448 512">
+                    <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39V186.36A209,209,0,0,1,448,209.91Z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/" class="social-icon" target="_blank" title="Síguenos en Instagram">
+                <svg viewBox="0 0 448 512">
+                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.8 9.9 67.6 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="footer-credits">
+            <p>© 2026 Agrocomercial Chicureo SpA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/56936433269?text=Hola,%20necesito%20fardos" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 448 512" width="28" height="28" fill="white">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+        </svg>
+    </a>
+
+    <div class="bot-toggle" id="botToggle">
+        💬 Preguntas Frecuentes
+    </div>
+
+    <div class="bot-container" id="botContainer">
+        <div class="bot-header">
+            <h5>Asistente Agrocomercial</h5>
+            <button class="bot-close" id="botClose">✕</button>
+        </div>
+        <div class="bot-chat-area" id="botChatArea">
+            <div class="msg bot">¡Hola! 🌾 Bienvenido a Agrocomercial Chicureo. ¿En qué te puedo ayudar hoy? Selecciona una opción abajo.</div>
+        </div>
+        <div class="bot-options">
+            <button class="opt-btn" onclick="askBot('¿Cuáles son los precios?', 'Contamos con excelentes precios competitivos al detalle y tarifas especiales por mayor sobre 40 fardos. Escríbenos directamente a WhatsApp para darte el valor exacto de hoy.')">💰 Ver Precios de Fardos</button>
+            <button class="opt-btn" onclick="askBot('¿Tienen despacho a domicilio?', '¡Sí! Hacemos despachos directos a parcelas en todo Chicureo, Colina, Lampa y Santiago Zona Norte. El envío se coordina según la cantidad de fardos.')">🚛 Cobertura de Despachos</button>
+            <button class="opt-btn" onclick="askBot('¿Qué formatos venden?', 'Nuestro producto estrella son los Fardos de Alfalfa de 30 KG con doble amarra de alambre. También vendemos Pellet de Alfalfa de alta concentración y Ballica seleccionada.')">📦 Formatos y Productos</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Lógica del Carrusel de Imágenes (Hero Slider)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 4500); // Cambia de imagen cada 4.5 segundos
+
+        // 2. Lógica de apertura/cierre del Bot Interactiva
+        const botToggle = document.getElementById('botToggle');
+        const botClose = document.getElementById('botClose');
+        const botContainer = document.getElementById('botContainer');
+        const chatArea = document.getElementById('botChatArea');
+
+        botToggle.addEventListener('click', () => botContainer.classList.add('open'));
+        botClose.addEventListener('click', () => botContainer.classList.remove('open'));
+
+        // 3. Sistema de respuestas en tiempo real del Bot
+        function askBot(userQuestion, botAnswer) {
+            // Pone la pregunta del usuario
+            chatArea.innerHTML += `<div class="msg user">${userQuestion}</div>`;
+            
+            // Pone la respuesta automática del bot con un delay de simulación
+            setTimeout(() => {
+                chatArea.innerHTML += `<div class="msg bot">${botAnswer}</div>`;
+                // Añade un acceso directo a WhatsApp dentro de la respuesta para cerrar la venta
+                chatArea.innerHTML += `<div class="msg bot" style="background-color:#e1f5fe; border:1px solid #b3e5fc;">🟢 Para cerrar tu pedido ahora, haz <a href="https://wa.me/56936433269" target="_blank" style="color:var(--primary); font-weight:bold; text-decoration:underline;">clic aquí para hablar con un ejecutivo</a>.</div>`;
+                chatArea.scrollTop = chatArea.scrollHeight; // Autoscroll al final del chat
+            }, 400);
+        }
+    </script>
+
+</body>
+</html>
